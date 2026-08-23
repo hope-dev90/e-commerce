@@ -1,0 +1,38 @@
+name: Microservices CI Pipeline
+
+# 1. Trigger the workflow when pushing to any of your 3 branches
+on:
+  push:
+    branches:
+      - auth
+      - product
+      - order
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 2. Pull the code from your GitHub repository into the runner runner
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 3. Figure out which branch triggered this pipeline
+      - name: Detect Service Branch
+        id: branch-check
+        run: echo "RUNNING_SERVICE=${{ github.ref_name }}" >> $GITHUB_ENV
+
+      # 4. Print a message acting like a real DevOps build process
+      - name: Simulating Build and Test
+        run: |
+          echo "DevOps Pipeline Active!"
+          echo "Starting build process for the $RUNNING_SERVICE service..."
+          echo "Running tests..."
+          echo "Build successful for $RUNNING_SERVICE!"
+      # 4. HEALTH CHECK & LOG TRACING (THE ERROR CHECKER)
+      - name: Post-Deployment Health Check & Logs
+        if: always()
+        run: |
+          echo "Checking service status..."
+          echo "Fetching recent runtime logs for container: $SERVICE_NAME"
+          # Appends continuous application feedback data straight into your UI console

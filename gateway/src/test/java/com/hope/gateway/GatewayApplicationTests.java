@@ -1,10 +1,10 @@
-package com.hope.auth;
+package com.hope.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AuthApplicationTests {
+class GatewayApplicationTests {
 
 	@Test
 	void contextLoads() {
