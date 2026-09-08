@@ -1,7 +1,0 @@
-com/hope/message/repository/MessageRepository.class
-com/hope/message/entity/MessageEntity.class
-com/hope/message/config/CorsConfig.class
-com/hope/message/dto/MessageDto.class
-com/hope/message/controller/MessageController.class
-com/hope/message/MessageApplication.class
-com/hope/message/services/MessageService.class
