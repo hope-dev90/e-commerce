@@ -1,0 +1,7 @@
+/home/hope/Documents/projects/microservices/message/src/main/java/com/hope/message/MessageApplication.java
+/home/hope/Documents/projects/microservices/message/src/main/java/com/hope/message/config/CorsConfig.java
+/home/hope/Documents/projects/microservices/message/src/main/java/com/hope/message/controller/MessageController.java
+/home/hope/Documents/projects/microservices/message/src/main/java/com/hope/message/dto/MessageDto.java
+/home/hope/Documents/projects/microservices/message/src/main/java/com/hope/message/entity/MessageEntity.java
+/home/hope/Documents/projects/microservices/message/src/main/java/com/hope/message/repository/MessageRepository.java
+/home/hope/Documents/projects/microservices/message/src/main/java/com/hope/message/services/MessageService.java
