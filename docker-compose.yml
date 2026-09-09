@@ -1,0 +1,131 @@
+services:
+
+  # ── Databases ──────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:17-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    networks:
+      - microservices-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Auth Service ───────────────────────────────────────────────────────
+  auth:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    container_name: auth-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/auth_db
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - microservices-net
+    restart: on-failure
+
+  # ── Order Service ──────────────────────────────────────────────────────
+  order:
+    build:
+      context: ./order
+      dockerfile: Dockerfile
+    container_name: order-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/order_db
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+    ports:
+      - "8082:8082"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - microservices-net
+    restart: on-failure
+
+  # ── Product Service ────────────────────────────────────────────────────
+  product:
+    build:
+      context: ./product
+      dockerfile: Dockerfile
+    container_name: product-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/product_db
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "8083:8083"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - microservices-net
+    restart: on-failure
+
+  # ── Message Service ────────────────────────────────────────────────────
+  message:
+    build:
+      context: ./message
+      dockerfile: Dockerfile
+    container_name: message-service
+    environment:
+      SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
+      SPRING_MAIL_PASSWORD: ${MAIL_PASSWORD}
+      APP_MAIL_RECIPIENT: ${MAIL_RECIPIENT}
+    ports:
+      - "8084:8084"
+    networks:
+      - microservices-net
+    restart: on-failure
+
+  # ── Gateway ────────────────────────────────────────────────────────────
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      SERVICES_AUTH_URL: http://auth:8081
+      SERVICES_ORDER_URL: http://order:8082
+      SERVICES_PRODUCT_URL: http://product:8083
+      SERVICES_MESSAGE_URL: http://message:8084
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      CORS_ALLOWED_METHODS: GET,POST,PUT,DELETE,OPTIONS
+      CORS_MAX_AGE: 3600
+    ports:
+      - "8080:8080"
+    depends_on:
+      - auth
+      - order
+      - product
+      - message
+    networks:
+      - microservices-net
+    restart: on-failure
+
+volumes:
+  postgres_data:
+
+networks:
+  microservices-net:
+    driver: bridge
