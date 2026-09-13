@@ -1,0 +1,7 @@
+.checkout-page h1 { font-size: 26px; margin-bottom: 20px; }
+.checkout-layout { display: flex; gap: 32px; flex-wrap: wrap; }
+.checkout-form { flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 12px; }
+.checkout-form h2 { font-size: 16px; font-weight: 700; }
+.checkout-form label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600; }
+.checkout-summary { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; min-width: 240px; font-size: 14px; line-height: 1.8; }
+.checkout-summary h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
