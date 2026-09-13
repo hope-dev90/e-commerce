@@ -4,10 +4,10 @@ FROM maven:3.9.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
 COPY pom.xml .
-RUN mvn dependency:go-offline -q
+RUN mvn dependency:resolve -q 2>/dev/null || true
 
 COPY src ./src
-RUN mvn package -DskipTests -q
+RUN mvn package -DskipTests
 
 # ── Stage 2: Runtime ──────────────────────────────────────────────────────
 FROM eclipse-temurin:21-jre-alpine
