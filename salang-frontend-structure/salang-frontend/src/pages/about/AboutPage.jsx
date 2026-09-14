@@ -1,12 +1,18 @@
+import { Link } from 'react-router-dom'
 import './AboutPage.css'
 
 function AboutPage() {
   return (
-    <div className="page about-page">
-      <h1>About Salang</h1>
-      <p>This is placeholder content for the Salang story.</p>
-      <p>We are a sample e-commerce store selling a variety of products. More details will be added later.</p>
-    </div>
+    <section className="about-mission">
+      <p className="about-eyebrow">Our Mission</p>
+      <h2 className="about-headline">
+        Empower local makers and shoppers to connect, trade, and thrive
+        together.
+      </h2>
+      <Link to="/products" className="about-cta">
+        Start Shopping
+      </Link>
+    </section>
   )
 }
 

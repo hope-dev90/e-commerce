@@ -7,14 +7,25 @@ function ProductCard({ product }) {
 
   return (
     <div className="product-card">
-      <img src={product.image} alt={product.name} className="product-card-img" />
+      <div className="product-card-img-wrap">
+        <img src={product.image} alt={product.name} className="product-card-img" />
+        <span className="product-card-category">{product.category}</span>
+      </div>
+
       <div className="product-card-body">
         <h3 className="product-card-name">{product.name}</h3>
-        <p className="product-card-price">${product.price}</p>
-        <p className="product-card-stock">Stock: {product.stock}</p>
-        <div className="product-card-actions">
-          <Link to={`/products/${product.id}`} className="btn-secondary" style={{ padding: '6px 12px', borderRadius: 4, fontSize: 13, border: '1px solid #222' }}>View Details</Link>
-          <button className="btn-primary" onClick={() => addToCart(product)}>Add to Cart</button>
+        <p className="product-card-desc">{product.description}</p>
+
+        <div className="product-card-footer">
+          <span className="product-card-price">${product.price}</span>
+          <div className="product-card-actions">
+            <Link to={`/products/${product.id}`} className="product-card-btn product-card-btn--ghost">
+              Details
+            </Link>
+            <button className="product-card-btn product-card-btn--fill" onClick={() => addToCart(product)}>
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
     </div>

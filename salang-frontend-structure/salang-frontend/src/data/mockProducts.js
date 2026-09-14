@@ -1,10 +1,17 @@
+import bracelet from '../assets/images/{brand,hero,products,categories,banners,testimonials,icons}/bracelet.png'
+import bShoe    from '../assets/images/{brand,hero,products,categories,banners,testimonials,icons}/b-shoe.png'
+import purse    from '../assets/images/{brand,hero,products,categories,banners,testimonials,icons}/purse.png'
+import sets     from '../assets/images/{brand,hero,products,categories,banners,testimonials,icons}/sets.png'
+import shoe     from '../assets/images/{brand,hero,products,categories,banners,testimonials,icons}/shoe.png'
+import watch    from '../assets/images/{brand,hero,products,categories,banners,testimonials,icons}/watch.png'
+
 const mockProducts = [
-  { id: 1, name: 'Simple T-Shirt',     price: 20, stock: 10, category: 'Clothing',     description: 'A plain comfortable t-shirt.',      image: 'https://placehold.co/300x300?text=T-Shirt'     },
-  { id: 2, name: 'Basic Backpack',     price: 35, stock: 15, category: 'Bags',         description: 'A basic everyday backpack.',         image: 'https://placehold.co/300x300?text=Backpack'    },
-  { id: 3, name: 'Simple Headphones',  price: 45, stock: 8,  category: 'Electronics',  description: 'Simple over-ear headphones.',        image: 'https://placehold.co/300x300?text=Headphones'  },
-  { id: 4, name: 'Classic Sneakers',   price: 50, stock: 12, category: 'Footwear',     description: 'Comfortable classic sneakers.',      image: 'https://placehold.co/300x300?text=Sneakers'    },
-  { id: 5, name: 'Simple Watch',       price: 30, stock: 7,  category: 'Accessories',  description: 'A simple everyday watch.',           image: 'https://placehold.co/300x300?text=Watch'       },
-  { id: 6, name: 'Everyday Bag',       price: 25, stock: 20, category: 'Bags',         description: 'A handy bag for daily use.',         image: 'https://placehold.co/300x300?text=Bag'         },
+  { id: 1, name: 'Gold Bracelet',    price: 20, stock: 10, category: 'Accessories', description: 'Elegant gold-tone bracelet for everyday wear.',        image: bracelet },
+  { id: 2, name: 'Brown Boots',      price: 50, stock: 12, category: 'Footwear',    description: 'Sturdy brown boots built for comfort and style.',       image: bShoe    },
+  { id: 3, name: 'Classic Purse',    price: 35, stock: 15, category: 'Bags',        description: 'A timeless purse that goes with any outfit.',           image: purse    },
+  { id: 4, name: 'Jewellery Set',    price: 45, stock: 8,  category: 'Accessories', description: 'Complete jewellery set — necklace, earrings & ring.',   image: sets     },
+  { id: 5, name: 'Leather Sneakers', price: 50, stock: 12, category: 'Footwear',    description: 'Clean leather sneakers for casual everyday wear.',      image: shoe     },
+  { id: 6, name: 'Simple Watch',     price: 30, stock: 7,  category: 'Accessories', description: 'Minimal watch that keeps it classy.',                   image: watch    },
 ]
 
 export default mockProducts

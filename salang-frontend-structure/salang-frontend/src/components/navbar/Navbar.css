@@ -1,55 +1,85 @@
+/* ── Outer wrapper ───────────────────────────────────────────────────── */
 .navbar-wrap {
   position: sticky;
   top: 0;
   z-index: 50;
   background: #FFF9F5;
-  padding: 18px 24px;
+  padding: 12px 24px;
 }
 
+/* ── Inner row: logo left, pill right ───────────────────────────────── */
 .navbar {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  background: #4A302C;
-  border-radius: 999px;
-  padding: 8px 10px 8px 20px;
-  box-shadow: 0 8px 24px rgba(74, 48, 44, 0.18);
 }
 
+/* ── Logo (untouched) ───────────────────────────────────────────────── */
 .navbar-logo {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  background: transparent;
+  text-decoration: none;
 }
 
 .navbar-logo-img {
-  height: 40px;
+  height: 80px;
   width: auto;
   display: block;
-  background: transparent;
-  mix-blend-mode: normal;
+  object-fit: contain;
 }
 
+/* ── Pill (links + actions) ──────────────────────────────────────────── */
+.navbar-pill {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: linear-gradient(180deg, rgba(74, 48, 44, 0.92) 0%, rgba(58, 38, 35, 0.92) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(244, 199, 184, 0.14);
+  border-radius: 999px;
+  padding: 9px 12px 9px 26px;
+  box-shadow:
+    0 1px 0 rgba(255, 249, 245, 0.06) inset,
+    0 12px 28px -10px rgba(30, 18, 16, 0.55);
+}
+
+/* ── Links ───────────────────────────────────────────────────────────── */
 .navbar-links {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 30px;
   margin: 0;
   padding: 0;
 }
 
 .navbar-links a {
+  position: relative;
   color: #FFF9F5;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 500;
-  opacity: 0.85;
+  letter-spacing: 0.2px;
+  opacity: 0.75;
+  white-space: nowrap;
+  padding-bottom: 3px;
   transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1.5px;
+  background: #F4C7B8;
+  transition: right 0.2s ease;
 }
 
 .navbar-links a:hover {
@@ -57,11 +87,18 @@
   color: #F4C7B8;
 }
 
+.navbar-links a:hover::after {
+  right: 0;
+}
+
+/* ── Actions ─────────────────────────────────────────────────────────── */
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   flex-shrink: 0;
+  padding-left: 16px;
+  border-left: 1px solid rgba(244, 199, 184, 0.16);
 }
 
 .navbar-cart {
@@ -69,13 +106,11 @@
   display: flex;
   align-items: center;
   color: #FFF9F5;
-  opacity: 0.85;
+  opacity: 0.8;
   transition: opacity 0.15s ease;
 }
 
-.navbar-cart:hover {
-  opacity: 1;
-}
+.navbar-cart:hover { opacity: 1; }
 
 .navbar-cart-badge {
   position: absolute;
@@ -86,7 +121,7 @@
   padding: 0 4px;
   border-radius: 999px;
   background: #C85C5C;
-  color: #FFFFFF;
+  color: #fff;
   font-size: 10px;
   font-weight: 600;
   display: flex;
@@ -98,20 +133,25 @@
   background: #F4C7B8;
   color: #4A302C;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   padding: 9px 20px;
   border-radius: 999px;
-  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px -6px rgba(244, 199, 184, 0.55);
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .navbar-cta:hover {
   background: #C85C5C;
   color: #FFF9F5;
+  box-shadow: 0 8px 20px -6px rgba(200, 92, 92, 0.5);
+  transform: translateY(-1px);
 }
 
+/* ── Responsive ──────────────────────────────────────────────────────── */
 @media (max-width: 720px) {
-  .navbar-links {
-    display: none;
-  }
+  .navbar-links { display: none; }
+  .navbar-actions { border-left: none; padding-left: 0; }
+  .navbar-pill { padding: 9px 12px; }
 }
