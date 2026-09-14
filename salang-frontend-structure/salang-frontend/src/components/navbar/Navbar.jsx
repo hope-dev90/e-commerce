@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart.js'
-import logo from '/home/hope/Documents/projects/microservices/salang-frontend-structure/salang-frontend/src/assets/images/{brand,hero,products,categories,banners,testimonials,icons}/logo.png'
+import logo from 'salang-frontend-structure/salang-frontend/src/assets/images/{brand,hero,products,categories,banners,testimonials,icons}/logo.png'
+import './Navbar.css'
 import './Navbar.css'
 
 function Navbar() {
